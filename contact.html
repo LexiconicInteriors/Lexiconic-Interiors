@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Lexiconic Interiors</title>
+  <meta name="description" content="Get in touch with Lexiconic Interiors, a Wilmington, NC interior design studio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html"><img src="images/lexiconic-logo.png" alt="Lexiconic Interiors, home" width="180" height="65"></a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="featured-projects.html">Featured Projects</a></li>
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+          <li class="insta"><a href="https://www.instagram.com/lexiconicinteriors/" target="_blank" rel="noopener">Instagram<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <div class="container">
+      <h1>Let’s talk</h1>
+      <div class="contact-grid">
+        <form id="contact-form" action="mailto:info@lexiconicinteriors.com" method="post" enctype="text/plain">
+          <label for="message">We’d love to hear what you’re dreaming up</label>
+          <textarea id="message" name="message" rows="8" maxlength="1500" required aria-describedby="message-help"></textarea>
+          <p id="message-help" class="help">
+          <button class="button" type="submit">Send by email</button>
+        </form>
+        <div>
+          <h2>Contact details</h2>
+          <ul class="details">
+            <li>Email: <a href="mailto:info@lexiconicinteriors.com">info@lexiconicinteriors.com</a></li>
+            <li>Wilmington, NC</li>
+            <li><a href="https://www.instagram.com/lexiconicinteriors/" target="_blank" rel="noopener">Follow us on Instagram<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <ul>
+        <li>Lexiconic Interiors</li>
+        <li><a href="mailto:info@lexiconicinteriors.com">info@lexiconicinteriors.com</a></li>
+        <li>Wilmington, NC</li>
+        <li><a href="https://www.instagram.com/lexiconicinteriors/" target="_blank" rel="noopener">Follow us on Instagram<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+      <p>&copy; 2026 Lexiconic Interiors</p>
+    </div>
+  </footer>
+  <script>
+    /* Opens the visitor's email app with their message ready to send. */
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var to = this.getAttribute("action").replace("mailto:", "");
+      var msg = document.getElementById("message").value;
+      window.location.href = "mailto:" + to + "?subject=" + encodeURIComponent("Project inquiry") + "&body=" + encodeURIComponent(msg);
+    });
+  </script>
+</body>
+</html>
