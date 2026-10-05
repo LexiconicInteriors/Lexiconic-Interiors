@@ -84,10 +84,9 @@ nav a[aria-current="page"] { border-bottom: 2px solid var(--text); font-weight: 
 nav .insta a {
   display: inline-flex; align-items: center; justify-content: center;
   width: 2.75rem; height: 2.75rem; padding: 0; border: 0; border-radius: 4px;
-  color: #9a6f2f; /* the deeper gold from the logo */
 }
-nav .insta a:hover { color: var(--text); text-decoration: none; }
-nav .insta svg { width: 1.5rem; height: 1.5rem; }
+nav .insta a:hover { filter: brightness(0.55); text-decoration: none; }
+nav .insta img { width: 1.5rem; height: 1.5rem; }
 
 /* Buttons */
 .button {
