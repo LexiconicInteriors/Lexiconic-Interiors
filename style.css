@@ -5,3 +5,68 @@ body {
   padding: 0 20px;
   line-height: 1.6;
 }
+
+<style>
+  /* 1. Remove the thin border around the Instagram icon */
+  .site-header nav .insta a,
+  .site-header nav .insta img {
+    border: 0 !important;
+    box-shadow: none !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+  .site-header nav .insta a:not(:focus-visible) {
+    outline: none !important;
+  }
+  .site-header nav .insta img {
+    display: block;
+  }
+
+  /* 2. Keep the navigation on one line on mobile */
+  .site-header nav ul {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-header nav li {
+    flex: 0 0 auto;
+  }
+  .site-header nav a {
+    white-space: nowrap;
+  }
+  @media (max-width: 760px) {
+    .site-header nav {
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .site-header nav::-webkit-scrollbar {
+      display: none;
+    }
+    .site-header nav ul {
+      gap: 0.6rem !important;
+      justify-content: center;
+    }
+    .site-header nav li a {
+      font-size: clamp(0.7rem, 3vw, 0.9rem) !important;
+      padding: 0.25rem 0 !important;
+      margin: 0 !important;
+    }
+    .site-header nav .insta img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* 3. Testimonial section uses the same background as the page */
+  .testimonial,
+  .testimonial figure,
+  .testimonial blockquote {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+</style>
