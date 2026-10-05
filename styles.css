@@ -30,7 +30,7 @@ img { display: block; max-width: 100%; height: auto; }
 a { color: var(--text); }
 
 /* Keyboard users: clearly visible focus on every link and button */
-:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+:focus-visible { outline: 0px solid var(--text); outline-offset: 0px; }
 main:focus { outline: none; }
 
 .visually-hidden {
