@@ -82,9 +82,10 @@ nav a {
 nav a:hover { text-decoration: underline; }
 nav a[aria-current="page"] { border-bottom: 2px solid var(--text); font-weight: 500; }
 nav .insta a {
-  border: 1px solid var(--text); border-radius: 4px;
-  padding: 0.5rem 0.75rem; font-size: 0.875rem;
+  border: 0; border-radius: 0;
+  padding: 0.6rem 0; font-size: 0.875rem;
 }
+nav .insta img { display: block; }
 
 /* Buttons */
 .button {
@@ -120,7 +121,7 @@ nav .insta a {
 
 /* Testimonial */
 .testimonial {
-  background: var(--white); border-top: 1px solid var(--text);
+  background: var(--bg); border-top: 1px solid var(--text);
   padding: 2rem 1.5rem; text-align: center; margin-top: 1.5rem;
 }
 .testimonial figure { margin: 0 0 1rem; }
@@ -148,7 +149,7 @@ nav .insta a {
 .details li { padding: 0.25rem 0; }
 
 /* Footer */
-.site-footer { background: var(#f5f5f3); border-top: 1px solid var(--text); font-size: 0.875rem; margin-top: 2rem; }
+.site-footer { background: var(--bg); border-top: 1px solid var(--text); font-size: 0.875rem; margin-top: 2rem; }
 .footer-inner {
   max-width: var(--max); margin: 0 auto; padding: 1rem 1.5rem;
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1.5rem;
@@ -183,7 +184,7 @@ nav .insta a {
 label { display: block; font-weight: 500; margin-bottom: 0.5rem; }
 textarea {
   display: block; width: 100%; min-height: 10rem;
-  background: var(#f5f5f3); color: var(--text);
+  background: var(--bg); color: var(--text);
   border: 1px solid var(--text); border-radius: 4px;
   padding: 0.75rem; font: inherit; line-height: 1.6; resize: vertical;
 }
