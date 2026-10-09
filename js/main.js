@@ -35,6 +35,58 @@
     update();
   });
 
+  /* ---------- Photo popup (Featured Projects) ---------- */
+
+  var box = document.getElementById("lightbox");
+
+  if (box && typeof box.showModal === "function") {
+    var boxImg = document.createElement("img");
+    boxImg.alt = "";
+    box.appendChild(boxImg);
+
+    var opener = null;
+    var fallbackSrc = "";
+
+    // If the full-size file is missing, show the tile photo instead.
+    boxImg.addEventListener("error", function () {
+      if (fallbackSrc && boxImg.getAttribute("src") !== fallbackSrc) {
+        boxImg.src = fallbackSrc;
+      } else {
+        boxImg.classList.remove("is-loading");
+      }
+    });
+
+    boxImg.addEventListener("load", function () {
+      boxImg.classList.remove("is-loading");
+    });
+
+    document.querySelectorAll("[data-lightbox]").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        var thumb = link.querySelector("img");
+        opener = link;
+        fallbackSrc = thumb ? (thumb.currentSrc || thumb.src) : "";
+        boxImg.alt = thumb ? thumb.alt : "";
+        boxImg.classList.add("is-loading");
+        boxImg.src = link.href;
+        box.showModal();
+        document.documentElement.classList.add("lightbox-open");
+      });
+    });
+
+    // Click anywhere except the photo itself (including the X) to close.
+    // The Esc key also closes it.
+    box.addEventListener("click", function (event) {
+      if (event.target !== boxImg) box.close();
+    });
+
+    box.addEventListener("close", function () {
+      document.documentElement.classList.remove("lightbox-open");
+      boxImg.removeAttribute("src");
+      if (opener) opener.focus();
+    });
+  }
+
   /* ---------- Contact form ---------- */
 
   var form = document.getElementById("contact-form");

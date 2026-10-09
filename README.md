@@ -33,9 +33,13 @@ A simple website made of plain files. No build tools needed. Hosted on GitHub Pa
 
 Tips: use JPGs about 1600 pixels wide and under 400 KB (the home hero can be about 2000 pixels wide). Use lowercase names with hyphens.
 
+## Full-size photos (the popup)
+
+Clicking a photo on Featured Projects opens it full size in a popup. The popup loads from `images/projects/full/`, using the same file name as the tile photo. For example, the tile `images/projects/sunny-rv-1.jpg` opens `images/projects/full/sunny-rv-1.jpg`. Until a full-size file exists, the popup shows the tile photo instead, so nothing breaks. Use JPGs about 2000 pixels on the long side, under about 800 KB each.
+
 ## Add more photos to a project
 
-In `featured-projects.html`, copy one `<li>...</li>` line inside that project's `<ul class="carousel-track">`, change the file name, and write a one-sentence `alt` description of the photo. The arrow buttons show up on their own once there are more photos than fit.
+Put the tile photo in `images/projects/` and the full-size version in `images/projects/full/`, with the same file name. Then, in `featured-projects.html`, copy one `<li>...</li>` line inside that project's `<ul class="carousel-track">`, change the file names (in both the link and the image) and write a one-sentence `alt` description. The arrow buttons show up on their own once there are more photos than fit.
 
 ## Add photos to Dreamr Studio
 
