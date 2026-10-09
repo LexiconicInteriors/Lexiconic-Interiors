@@ -1,40 +1,56 @@
 # Lexiconic Interiors website
 
-A simple website made of plain files. No tools or coding setup needed.
+A simple website made of plain files. No build tools needed. Hosted on GitHub Pages at www.lexiconicinteriors.com.
 
 ## What each file does
+
 - `index.html` is the Home page.
 - `featured-projects.html` is the Featured Projects page.
-- `our-story.html` is the Our Story page (two photos with bios).
+- `our-story.html` is the Our Story page.
 - `services.html` is the Services page.
 - `contact.html` is the Contact page.
-- `css/styles.css` holds all colors, fonts, and spacing for every page.
-- `images/` holds your logo and the two Our Story photos (`our-story-lexi.jpg`, `our-story-justin.jpg`).
+- `css/styles.css` holds all colors, fonts, and spacing. Change the `:root` block at the top to restyle every page.
+- `js/main.js` powers the photo arrows on Featured Projects and the Contact form.
+- `images/` holds every photo (see the list below).
+- `instagram-gold.png` is the Instagram icon in the header.
+- `CNAME` points the custom domain at GitHub Pages. Do not delete it.
 
-## Find what still needs your words
-Everything that still needs your own content is in [square brackets], for example `[Client name]`.
-Open a file, search for `[` (Ctrl+F or Cmd+F), and replace each one.
+## Image file names
 
-Your email (info@lexiconicinteriors.com) and Instagram (@lexiconicinteriors) are already filled in. If either changes, search for it in each `.html` file and replace it. The email appears in the footer and on `contact.html`, and in the `action="mailto:..."` part of the contact box. Instagram appears in the header, footer, and `contact.html`.
+| File | Where it appears |
+| --- | --- |
+| `images/lexiconic-logo.png` | Header logo on every page |
+| `images/home-hero.jpg` | Home: large photo at the top |
+| `images/home-1.jpg`, `home-2.jpg`, `home-3.jpg` | Home: row of three photos |
+| `images/contact-neon.jpg` | Contact: photo beside the form |
+| `images/our-story-lexi.jpg`, `our-story-justin.jpg` | Our Story |
+| `images/services-material-board.jpg` | Services: material board |
+| `images/projects/wandering-cone-1.jpg` to `-3.jpg` | Featured Projects: Wandering Cone Creamery |
+| `images/projects/beachy-v1-1.jpg` to `-3.jpg` | Featured Projects: Beachy Bright Escape V1 |
+| `images/projects/organized-start-1.jpg` to `-3.jpg` | Featured Projects: An Organized Start |
+| `images/projects/beachy-v2-1.jpg` | Featured Projects: Beachy Bright Escape V2 |
+| `images/projects/sunny-rv-1.jpg` to `-3.jpg` | Featured Projects: Sunny the RV |
 
-Also:
-- Check that each Our Story photo is paired with the right person. If not, swap the two image file names in `our-story.html` and update each photo's `alt` description.
+Tips: use JPGs about 1600 pixels wide and under 400 KB (the home hero can be about 2000 pixels wide). Use lowercase names with hyphens.
 
-## Hidden sections (until your project photos are ready)
-- On `index.html`, the large hero photo area and the "Featured projects" row are hidden inside HTML comments.
-- On `featured-projects.html`, the project grid is hidden the same way, and the page says "New projects are coming soon."
-- To show a section again, delete the `<!--` and `-->` lines around it, add your real photos (next section), and edit or remove the "coming soon" sentence.
+## Full-size photos (the popup)
 
-## Add a real photo in place of a gray placeholder
-1. Put your photo in the `images/` folder. Use a JPG about 1600 pixels wide, under 400 KB, with a lowercase-hyphen name like `lakeview-kitchen.jpg`.
-2. Find the gray block, such as `<div class="placeholder" aria-hidden="true">[Project photo]</div>`.
-3. Replace it with: `<img src="images/lakeview-kitchen.jpg" alt="Describe what is in the photo in one sentence" width="1600" height="1200">`
-4. Always write real alt text (a short description for people who can't see the photo). Skip phrases like "image of".
+Clicking a photo on Featured Projects opens it full size in a popup. The popup loads from `images/projects/full/`, using the same file name as the tile photo. For example, the tile `images/projects/sunny-rv-1.jpg` opens `images/projects/full/sunny-rv-1.jpg`. Until a full-size file exists, the popup shows the tile photo instead, so nothing breaks. Use JPGs about 2000 pixels on the long side, under about 800 KB each.
+
+## Add more photos to a project
+
+Put the tile photo in `images/projects/` and the full-size version in `images/projects/full/`, with the same file name. Then, in `featured-projects.html`, copy one `<li>...</li>` line inside that project's `<ul class="carousel-track">`, change the file names (in both the link and the image) and write a one-sentence `alt` description. The arrow buttons show up on their own once there are more photos than fit.
+
+## Add photos to Dreamr Studio
+
+In `featured-projects.html`, replace the `Photos Coming Soon` line with a carousel block copied from another project.
+
+## Contact form
+
+The form opens the visitor's email app with their message ready to send to info@lexiconicinteriors.com. It needs no outside service. It will not work for visitors who only use webmail with no email app set up. A free form service such as Formspree can replace it later. To change the address, edit `contact.html` and `js/main.js`.
 
 ## Keep it accessible when you edit
-- Each page has exactly one `<h1>`. Sections use `<h2>`, then `<h3>`.
-- Link text should say where it goes ("See all featured projects"), never "click here".
-- Don't use gold for text. It does not have enough contrast on the off-white background.
 
-## The contact box
-The Contact page has one open text box. When a visitor presses "Send by email", their email app opens with their message ready to send to the address in the `action="mailto:..."` part of `contact.html`. It needs no outside service and no CAPTCHA. It will not work for visitors who only use webmail with no email app set up. A free form service can replace it later.
+- Each page has one main heading (`<h1>`).
+- Every photo needs an `alt` description of what is in it. Skip phrases like "image of".
+- Link text should say where it goes, never "click here".
