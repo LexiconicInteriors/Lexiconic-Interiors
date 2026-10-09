@@ -8,6 +8,7 @@
   --ink: #000;
   --muted: #6b6b6b;
   --line: #000;
+  --rule: #cfcfcf; /* thin gray divider lines (header, footer, project sections) */
   --serif: "Lora", Georgia, "Times New Roman", serif;
   --sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --page-max: 1280px;
@@ -100,7 +101,7 @@ a {
 }
 
 .site-header.is-ruled {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--rule);
 }
 
 .header-inner {
@@ -158,7 +159,7 @@ a {
 /* ---------- Footer ---------- */
 
 .site-footer {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--rule);
   padding: 2.25rem 1.5rem;
   text-align: center;
   font-size: 0.8rem;
@@ -245,7 +246,7 @@ a {
 /* ---------- Our Story ---------- */
 
 .quote-band {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--rule);
   padding: 2rem 1.5rem;
   text-align: center;
 }
@@ -314,8 +315,14 @@ a {
 /* ---------- Featured Projects ---------- */
 
 .project {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--rule);
   padding: 1.5rem 0 1.75rem;
+}
+
+/* The header already draws a line right above the first project,
+   so skip this one to avoid a doubled (thicker) line. */
+.project:first-of-type {
+  border-top: 0;
 }
 
 .project-inner {
@@ -506,6 +513,18 @@ html.lightbox-open {
 }
 
 /* ---------- Two-column pages (Contact, Services) ---------- */
+
+/* On tall windows the footer stays at the bottom, so the leftover space is
+   split above and below the content instead of all landing under it. */
+main:has(> .split) {
+  display: flex;
+  flex-direction: column;
+}
+
+main:has(> .split) > .split {
+  width: 100%;
+  margin-block: auto;
+}
 
 .split {
   display: grid;
