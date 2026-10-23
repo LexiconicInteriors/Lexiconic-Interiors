@@ -19,7 +19,8 @@ A simple website made of plain files. No build tools needed. Hosted on GitHub Pa
 
 | File | Where it appears |
 | --- | --- |
-| `images/lexiconic-logo.png` | Header logo on every page |
+| `images/lexiconic-logo.svg` | Header logo on every page (vector, stays sharp at any size) |
+| `images/stars.svg` | Home: the gold stars above the heading (vector, shown 100px wide) |
 | `images/home-hero.jpg` | Home: large photo at the top |
 | `images/home-1.jpg`, `home-2.jpg`, `home-3.jpg` | Home: row of three photos |
 | `images/contact-neon.jpg` | Contact: photo beside the form |
