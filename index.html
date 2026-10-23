@@ -17,15 +17,18 @@
 <header class="site-header">
   <div class="header-inner">
     <a class="logo" href="index.html"><img src="images/lexiconic-logo.png" alt="Lexiconic Interiors, home" width="180" height="65"></a>
-    <nav aria-label="Main">
-      <ul>
-        <li><a href="featured-projects.html">Featured Projects</a></li>
-        <li><a href="our-story.html">Our Story</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li class="insta"><a href="https://www.instagram.com/lexiconicinteriors/" target="_blank" rel="noopener"><img src="instagram-gold.png" alt="" width="24" height="24"><span class="visually-hidden">Instagram (opens in a new tab)</span></a></li>
-      </ul>
-    </nav>
+    <div class="header-right">
+      <nav aria-label="Main" id="site-menu">
+        <ul>
+          <li><a href="featured-projects.html">Featured Projects</a></li>
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="insta-link" href="https://www.instagram.com/lexiconicinteriors/" target="_blank" rel="noopener"><img src="instagram-gold.png" alt="" width="24" height="24"><span class="visually-hidden">Instagram (opens in a new tab)</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Menu"><svg class="icon-open" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg><svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></button>
+    </div>
   </div>
 </header>
 
@@ -34,6 +37,7 @@
   <img class="hero" src="images/home-hero.jpg" width="1628" height="1102" alt="A big-kid bedroom with a boat-shaped bed, a beach mural, a palm tree floor lamp, and a wall of toy shelves">
 
   <section class="intro">
+    <img class="intro-stars" src="images/stars.png" alt="" width="119" height="121">
     <h1>Where Stories Become Spaces</h1>
     <p>Welcome to Lexiconic Interiors, a Wilmington, NC interior design studio here to help you bring your interior dreams to life. We believe the best spaces are beautiful, functional, and personal.</p>
   </section>
@@ -60,5 +64,6 @@
   <p>&copy; 2026 Lexiconic Interiors</p>
 </footer>
 
+<script src="js/main.js" defer></script>
 </body>
 </html>

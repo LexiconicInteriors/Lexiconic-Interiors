@@ -3,6 +3,50 @@
 (function () {
   "use strict";
 
+  /* ---------- Phone menu (hamburger) ---------- */
+
+  var header = document.querySelector(".site-header");
+  var toggle = header && header.querySelector(".menu-toggle");
+  var menu = document.getElementById("site-menu");
+
+  if (header && toggle && menu) {
+    var setOpen = function (open) {
+      header.classList.toggle("menu-open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    var isOpen = function () {
+      return toggle.getAttribute("aria-expanded") === "true";
+    };
+
+    toggle.addEventListener("click", function (event) {
+      var open = !isOpen();
+      setOpen(open);
+      // Keyboard users land on the first link; touch users are left alone.
+      if (open && event.detail === 0) {
+        var first = menu.querySelector("a");
+        if (first) first.focus();
+      }
+    });
+
+    // Close with Esc, by tapping outside, by choosing a link, or when the
+    // window grows to desktop width.
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && isOpen()) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    document.addEventListener("click", function (event) {
+      if (isOpen() && !header.contains(event.target)) setOpen(false);
+    });
+    menu.addEventListener("click", function (event) {
+      if (event.target.closest("a")) setOpen(false);
+    });
+    window.matchMedia("(min-width: 761px)").addEventListener("change", function (event) {
+      if (event.matches) setOpen(false);
+    });
+  }
+
   /* ---------- Photo carousels (Featured Projects) ---------- */
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -89,31 +133,64 @@
 
   /* ---------- Contact form ---------- */
 
+  // The form sends its message by email through FormSubmit (formsubmit.co).
+  // The address lives in the form's action in contact.html.
   var form = document.getElementById("contact-form");
   if (form) {
-    var TO = "info@lexiconicinteriors.com";
     var status = document.getElementById("form-status");
+    var button = form.querySelector("button[type=submit]");
+    var buttonText = button ? button.textContent : "Submit";
+    var FALLBACK_EMAIL = "lexiconicinteriors@gmail.com";
+
+    var show = function (html, isError) {
+      status.innerHTML = html;
+      status.classList.toggle("is-error", !!isError);
+    };
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
+      if (button.disabled) return;
 
-      var name = document.getElementById("name").value.trim();
-      var email = document.getElementById("email").value.trim();
-      var message = document.getElementById("message").value.trim();
+      // Spam trap: a real person never fills in the hidden field.
+      var trap = form.querySelector("[name=_honey]");
+      if (trap && trap.value) return;
 
-      var subject = "Website inquiry from " + name;
-      var body = message + "\n\n" + name + "\n" + email;
+      // Send without leaving the page (FormSubmit's "ajax" address).
+      var url = form.getAttribute("action");
+      if (url.indexOf("/ajax/") === -1) url = url.replace("formsubmit.co/", "formsubmit.co/ajax/");
 
-      window.location.href =
-        "mailto:" + TO +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body);
+      button.disabled = true;
+      button.textContent = "Sending\u2026";
+      show("", false);
 
-      if (status) {
-        status.textContent =
-          "Your email app should open with your message ready to send. " +
-          "If it doesn\u2019t, you can email us at " + TO + ".";
-      }
+      fetch(url, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form)
+      })
+        .then(function (response) {
+          return response.json().then(
+            function (data) { return { ok: response.ok, data: data }; },
+            function () { return { ok: response.ok, data: {} }; }
+          );
+        })
+        .then(function (result) {
+          var success = result.ok && String(result.data.success) === "true";
+          if (!success) throw new Error("not sent");
+          form.reset();
+          show("Thank you! Your message was sent, and we\u2019ll be in touch soon.", false);
+        })
+        .catch(function () {
+          show(
+            "Sorry, your message couldn\u2019t be sent. Please try again, or email us at " +
+            '<a href="mailto:' + FALLBACK_EMAIL + '">' + FALLBACK_EMAIL + "</a>.",
+            true
+          );
+        })
+        .then(function () {
+          button.disabled = false;
+          button.textContent = buttonText;
+        });
     });
   }
 })();
