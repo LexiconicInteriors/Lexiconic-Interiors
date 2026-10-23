@@ -97,6 +97,8 @@ a {
 /* ---------- Header ---------- */
 
 .site-header {
+  position: relative;
+  z-index: 10;
   background: var(--bg);
 }
 
@@ -119,6 +121,12 @@ a {
   display: block;
   width: clamp(120px, 14vw, 180px);
   height: auto;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 4vw, 3.5rem);
 }
 
 .site-header nav ul {
@@ -144,16 +152,41 @@ a {
   border-bottom-color: var(--ink);
 }
 
-.site-header .insta a {
+.site-header .insta-link {
   display: block;
-  padding: 0;
-  border-bottom: 0;
+  flex: 0 0 auto;
 }
 
-.site-header .insta img {
+.site-header .insta-link img {
   display: block;
   width: 24px;
   height: 24px;
+}
+
+/* Menu button: only shown on phones */
+.menu-toggle {
+  display: none;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.menu-toggle svg {
+  display: block;
+}
+
+.menu-toggle .icon-close,
+.menu-toggle[aria-expanded="true"] .icon-open {
+  display: none;
+}
+
+.menu-toggle[aria-expanded="true"] .icon-close {
+  display: block;
 }
 
 /* ---------- Footer ---------- */
@@ -180,14 +213,23 @@ a {
 }
 
 .intro {
+  /* The stars scale with the heading, so they stay in proportion at every screen size */
+  --intro-heading: clamp(1.6rem, 3vw, 2rem);
   max-width: 780px;
   margin: 0 auto;
   padding: 3.5rem 1.5rem 3rem;
   text-align: center;
 }
 
+.intro-stars {
+  display: block;
+  width: auto;
+  height: calc(var(--intro-heading) * 1.75);
+  margin: 0 auto calc(var(--intro-heading) * 0.45);
+}
+
 .intro h1 {
-  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-size: var(--intro-heading);
   margin-bottom: 1.5rem;
 }
 
@@ -247,7 +289,7 @@ a {
 
 .quote-band {
   border-bottom: 1px solid var(--rule);
-  padding: 2rem 1.5rem;
+  padding: 3.25rem 1.5rem;
   text-align: center;
 }
 
@@ -632,16 +674,39 @@ main:has(> .split) > .split {
   font-size: 0.9rem;
 }
 
+.form-status.is-error {
+  color: #9b1c1c;
+}
+
+.form-status a {
+  color: inherit;
+}
+
+.button[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.button[disabled]:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
+/* Hidden spam trap: real visitors never see or fill this in */
+.hp {
+  display: none;
+}
+
 /* ---------- Small screens ---------- */
 
 @media (max-width: 760px) {
-  /* Keep the desktop look: logo on the left, links on the right.
-     The links wrap onto a second right-aligned line when space runs out. */
+  /* Logo on the left; Instagram + menu button on the right.
+     The links live in a dropdown that the menu button opens. */
   .header-inner {
     flex-wrap: nowrap;
     gap: 0.75rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 
   .logo {
@@ -649,28 +714,59 @@ main:has(> .split) > .split {
   }
 
   .logo img {
-    width: clamp(92px, 26vw, 130px);
+    width: clamp(100px, 28vw, 140px);
+  }
+
+  .header-right {
+    gap: 0;
+    margin-left: auto;
+  }
+
+  .site-header .insta-link {
+    padding: 0.6rem;
+  }
+
+  .menu-toggle {
+    display: grid;
+    margin-right: -0.5rem;
   }
 
   .site-header nav {
-    flex: 1 1 auto;
-    min-width: 0;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    box-shadow: 0 14px 24px -14px rgba(0, 0, 0, 0.2);
+  }
+
+  .site-header.menu-open nav {
+    display: block;
   }
 
   .site-header nav ul {
-    justify-content: flex-end;
-    gap: 0.1rem 0.875rem;
-    text-align: right;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+
+  .site-header nav li + li {
+    border-top: 1px solid var(--rule);
   }
 
   .site-header nav a {
-    padding: 0.45rem 0;
-    font-size: 0.875rem;
+    display: block;
+    padding: 1rem var(--gutter);
+    font-size: 1rem;
+    border-bottom: 0;
   }
 
-  .site-header .insta a {
-    padding: 0.35rem;
-    margin: -0.35rem -0.35rem -0.35rem 0;
+  .site-header nav a[aria-current="page"] {
+    font-weight: 600;
   }
 
   .tiles {
@@ -696,9 +792,15 @@ main:has(> .split) > .split {
     grid-template-columns: 1fr;
   }
 
+  /* Show the whole Contact photo (it is a tall portrait), not a cropped band */
   .split.contact figure {
     min-height: 0;
-    aspect-ratio: 4 / 3;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .split.contact figure img {
+    height: auto;
   }
 
   .split.services figure {

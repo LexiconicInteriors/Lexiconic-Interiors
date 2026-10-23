@@ -47,7 +47,12 @@ In `featured-projects.html`, replace the `Photos Coming Soon` line with a carous
 
 ## Contact form
 
-The form opens the visitor's email app with their message ready to send to info@lexiconicinteriors.com. It needs no outside service. It will not work for visitors who only use webmail with no email app set up. A free form service such as Formspree can replace it later. To change the address, edit `contact.html` and `js/main.js`.
+The form sends each message by email to lexiconicinteriors@gmail.com through FormSubmit (formsubmit.co), a free service. The visitor stays on the page and sees a thank-you note. The address is in the form's `action` in `contact.html`: change it there to send messages somewhere else (the new address needs a one-time activation, like the first one).
+
+- The very first message sent through the form triggers an activation email from FormSubmit. Click the link in it once, and every message after that goes straight to the inbox. Check spam if it doesn't show up.
+- After activating, FormSubmit can give you a private "random string" address. Putting that in the form's `action` instead of the email hides the email address from people who read the page source.
+- A hidden field (`_honey`) catches most spam bots. If spam gets through, tell me and I can add more protection.
+- If the service is ever down, the page tells the visitor to email lexiconicinteriors@gmail.com directly.
 
 ## Keep it accessible when you edit
 
